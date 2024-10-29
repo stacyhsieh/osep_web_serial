@@ -60550,6 +60550,7 @@ export default {
     "gui.menuBar.burnFirmware_e":"燒錄ESP",
     "gui.menuBar.burnFirmware_m":"燒錄Microbit",
     "gui.extension.linenotify.description":"Line通知，傳送訊息",
+        "gui.extension.telegrambot.description":"Telegram bot通知，傳送訊息",
     "gui.extension.microbitMore.description":"玩轉 micro:bit 的所有功能。(v2-0.2.4)",
     "gui.extension.microbit.connectingMessage":"連線",
     "gui.extension.chart.description":"使用 Chart.js 函式庫製作圖表，透過資料視覺化來檢視資料",

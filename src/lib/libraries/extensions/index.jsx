@@ -98,6 +98,9 @@ import mqttInsetIconURL from "./mqtt/mqtt-small.png";
 import linenotifyImage from "./linenotify/linenotify.svg";
 import linenotifyInsetIconURL from "./linenotify/linenotify_small.svg";
 
+import telegrambotImage from "./telegrambot/telegrambot.svg";
+import telegrambotInsetIconURL from "./telegrambot/telegrambot_small.svg";
+
 import ml2scratchIconURL from "./ml2scratch/ml2scratch.png";
 import ml2scratchInsetIconURL from "./ml2scratch/ml2scratch-small.png";
 
@@ -707,6 +710,25 @@ const extensions = [
         defaultMessage="Use Line Notify to send messages."
         description="Use Line Notify to send messages."
         id="gui.extension.linenotify.description"
+      />
+    ),
+    featured: true,
+    disabled: false,
+    internetConnectionRequired: true,
+    bluetoothRequired: false,
+    //helpLink: ''
+  },
+  {
+    name: "TelegramBot",
+    extensionId: "telegrambot",
+    collaborator: "estea chen",
+    iconURL: telegrambotImage,
+    insetIconURL: telegrambotInsetIconURL,
+    description: (
+      <FormattedMessage
+        defaultMessage="Use Line Notify to send messages."
+        description="Use Line Notify to send messages."
+        id="gui.extension.telegrambot.description"
       />
     ),
     featured: true,
