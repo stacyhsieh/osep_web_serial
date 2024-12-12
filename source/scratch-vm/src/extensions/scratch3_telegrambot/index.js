@@ -130,37 +130,75 @@ class Scratch3TelegramBot {
     }
 
     async sendmessage(args){
-        //const args_message = args.MESSAGE;
-        this.payload.message = args.MESSAGE;
-        console.log(this.payload);
-        //if(this.payload.token =='' || this.payload.message == ''){
-            //alert(msg.TokenNull[the_locale]);
-        //}else{
-            //GET https://api.telegram.org/bot12345:AAJqs_w-4/sendMessage?chat_id=-1001033293696&text=Hello
-            //let send_text=encodeURI(this.payload.message+'\n\r'+this.payload.imageFile);
-            await fetch('https://api.telegram.org/'+this.payload.token+'/sendMessage?chat_id='+ this.payload.chat_id+'&text='+encodeURI(this.payload.message+'\n\r'+this.payload.imageFile))
-            .then(function (response) {
-                //return response.json();
-                console.log(response.json());
-            })
-            /*.then(function (myJson) {
-                console.log(myJson);
-            })*/;
+        try {
+            this.payload.message = args.MESSAGE;
+            console.log('Sending message:', this.payload);
+            
+            const response = await fetch(
+                `https://api.telegram.org/bot${this.payload.token}/sendMessage`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: this.payload.chat_id,
+                        text: this.payload.message
+                    })
+                }
+            );
 
-        //}
-        this.payload={
-            token:'',
-            message:'',
-            imageFile:'',
-            chat_id:'',
-            StickerPackageId:''
-        };
+            const result = await response.json();
+            console.log('API Response:', result);
 
+            if (!result.ok) {
+                console.error('Telegram API Error:', result.description);
+                return;
+            }
+
+            // 成功發送後再清空
+            this.payload.message = '';
+            this.payload.imageFile = '';
+            
+        } catch (error) {
+            console.error('Error sending message:', error);
+        }
     }
     
-    async sendimagefile(args){
-        this.payload.imageFile = args.URL;
-        console.log('payload=',this.payload);
+    async sendimagefile(args) {
+        try {
+            this.payload.imageFile = args.URL;
+            console.log('Sending image:', this.payload);
+            
+            const response = await fetch(
+                `https://api.telegram.org/bot${this.payload.token}/sendPhoto`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: this.payload.chat_id,
+                        photo: this.payload.imageFile,  // 直接使用圖片URL
+                        caption: '圖片來自Scratch'  // 可選的圖片說明
+                    })
+                }
+            );
+
+            const result = await response.json();
+            console.log('API Response:', result);
+
+            if (!result.ok) {
+                console.error('Telegram API Error:', result.description);
+                return;
+            }
+
+            // 成功發送後清空圖片URL
+            this.payload.imageFile = '';
+            
+        } catch (error) {
+            console.error('Error sending image:', error);
+        }
     }
 
     async sendstickerId(args){
