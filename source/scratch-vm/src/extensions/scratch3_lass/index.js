@@ -7,8 +7,8 @@ const menuIconURI = null;
 const blockIconURI = null;
 
 const LASS_URI = 'https://pm25.lass-net.org/data/last.php?device_id=';
-//const AQI_URI = 'https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate desc&format=json';
 const AQI_URI = 'https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=json';
+const WERTHER_URL = 'https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?format=JSON&Authorization=';
 
 let theLocale = null;
 
@@ -33,6 +33,8 @@ class gasoLASS {
         this.getEPAStation();
         this.siteName = ["基隆"];
         this.EPAData = {};
+
+        this.weatherData = {};
     }
 
 
@@ -157,6 +159,40 @@ class gasoLASS {
                     blockType: BlockType.REPORTER,
                     text: msg.EPAStation[theLocale]
                 },
+                "---",
+                {
+                    opcode: 'authorization',
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        apiKey: {
+                            type: ArgumentType.STRING,
+                            defaultValue: "API Key"
+                        }
+                    },
+                    text: msg.authorization[theLocale]
+                },
+                {
+                    opcode: 'getWeatherData',
+                    blockType: BlockType.REPORTER,
+                    arguments: {
+                        locationName: {
+                            type: ArgumentType.STRING,
+                            menu: 'locationName',
+                            defaultValue: 5
+                        },
+                        forecastTime: {
+                            type: ArgumentType.NUMBER,
+                            menu: 'forecastTime',
+                            defaultValue: 0
+                        },
+                        weatherAttrs: {
+                            type: ArgumentType.STRING,
+                            menu: 'weatherAttrs',
+                            defaultValue: 0
+                        }
+                    },
+                    text: msg.getWeatherData[theLocale]
+                },
             ],
             menus: {
                 lassAttrs: {
@@ -176,7 +212,52 @@ class gasoLASS {
                         { text: 'O3', value: 'o3' },
                         { text: msg.publishTime[theLocale], value: 'publishtime' }
                     ]
-                }
+                },
+                locationName: {
+                    acceptReporters: true,
+                    items: [
+                        { text: msg.taipeiCity[theLocale], value: 5 },
+                        { text: msg.newTaipeiCity[theLocale], value: 1 },
+                        { text: msg.taoyuanCity[theLocale], value: 13 },
+                        { text: msg.taichungCity[theLocale], value: 11 },
+                        { text: msg.tainanCity[theLocale], value: 6 },
+                        { text: msg.kaohsiungCity[theLocale], value: 15 },
+                        { text: msg.keelungCity[theLocale], value: 18 },
+                        { text: msg.hsinchuCounty[theLocale], value: 3 },
+                        { text: msg.hsinchuCity[theLocale], value: 4 },
+                        { text: msg.miaoliCounty[theLocale], value: 8 },
+                        { text: msg.changhuaCounty[theLocale], value: 20 },
+                        { text: msg.nantouCounty[theLocale], value: 14 },
+                        { text: msg.yunlinCounty[theLocale], value: 9 },
+                        { text: msg.chiayiCounty[theLocale], value: 0 },
+                        { text: msg.chiayiCity[theLocale], value: 2 },
+                        { text: msg.pingtungCounty[theLocale], value: 17 },
+                        { text: msg.yilanCounty[theLocale], value: 7 },
+                        { text: msg.hualienCounty[theLocale], value: 10 },
+                        { text: msg.taitungCounty[theLocale], value: 12 },
+                        { text: msg.penghuCounty[theLocale], value: 19 },
+                        { text: msg.kinmenCounty[theLocale], value: 16 },
+                        { text: msg.lienchiangCounty[theLocale], value: 21 },
+                    ]
+                },
+                forecastTime: {
+                    acceptReporters: true,
+                    items: [
+                        { text: '12', value: 0 },
+                        { text: '24', value: 1 },
+                        { text: '36', value: 2 },
+                    ]
+                },
+                weatherAttrs: {
+                    acceptReporters: true,
+                    items: [
+                        { text: msg.Wx[theLocale], value: 0 },
+                        { text: msg.MaxT[theLocale], value: 4 },
+                        { text: msg.MinT[theLocale], value: 2 },
+                        { text: msg.CI[theLocale], value: 3 },
+                        { text: msg.PoP[theLocale], value: 1 }
+                    ]
+                },
             }
         };
     }
@@ -284,6 +365,35 @@ class gasoLASS {
         this.fetchEPAData(siteName, attr);
 
         return this.EPAData;
+    }
+
+    authorization(args) {
+        var apiKey = args.apiKey;
+        const url = `${WERTHER_URL}${apiKey}`;
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                this.weatherData = data;
+            });
+    }
+
+    getWeatherData(args) {
+        var locationName = args.locationName;
+        var forecastTime = args.forecastTime;
+        var weatherAttrs = args.weatherAttrs;
+
+        var jsonData = JSON.stringify(this.weatherData);
+        var parseData = JSON.parse(jsonData);
+
+        var wx8 = parseData["records"]["location"][locationName]["weatherElement"][weatherAttrs]["time"][forecastTime]["parameter"]["parameterName"];
+
+        return wx8;
     }
 }
 

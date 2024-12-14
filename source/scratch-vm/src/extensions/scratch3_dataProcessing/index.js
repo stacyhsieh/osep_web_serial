@@ -255,7 +255,28 @@ class dataProcessing {
                         },
                     }
                 },
-
+                {
+                    opcode: 'fullwidthToHalfwidth',
+                    blockType: BlockType.REPORTER,
+                    arguments: {
+                        data: {
+                            type: ArgumentType.STRING,
+                            defaultValue: 'ＡＢＣ１２３'
+                        },
+                    },
+                    text: msg.fullwidthToHalfwidth[theLocale]
+                },
+                {
+                    opcode: 'halfwidthToFullwidth',
+                    blockType: BlockType.REPORTER,
+                    arguments: {
+                        data: {
+                            type: ArgumentType.STRING,
+                            defaultValue: 'ABC123'
+                        },
+                    },
+                    text: msg.halfwidthToFullwidth[theLocale]
+                },
             ],
             menus: {
                 selectYear: {
@@ -384,6 +405,39 @@ class dataProcessing {
         return conver_value;
     }
 
+    fullwidthToHalfwidth(args) {
+        const data = args.data;
+        let result = '';
+        for (let i = 0; i < data.length; i++) {
+            const charCode = data.charCodeAt(i);
+            // 全形字符范围：65281-65374
+            if (charCode >= 65281 && charCode <= 65374) {
+                result += String.fromCharCode(charCode - 65248);
+            } else if (charCode === 12288) { // 全形空格
+                result += String.fromCharCode(32);
+            } else {
+                result += data[i];
+            }
+        }
+        return result;
+    }
+
+    halfwidthToFullwidth(args) {
+        const data = args.data;
+        let result = '';
+        for (let i = 0; i < data.length; i++) {
+            const charCode = data.charCodeAt(i);
+            // 半形字符范围：33-126
+            if (charCode >= 33 && charCode <= 126) {
+                result += String.fromCharCode(charCode + 65248);
+            } else if (charCode === 32) { // 半形空格
+                result += String.fromCharCode(12288);
+            } else {
+                result += data[i];
+            }
+        }
+        return result;
+    }
 
 }
 
