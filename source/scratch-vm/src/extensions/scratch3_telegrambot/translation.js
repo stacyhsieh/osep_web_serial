@@ -18,9 +18,9 @@ export const TokenNull ={
     'zh-tw': '權杖或傳送訊息錯誤',
 };
 
-export const SendstickerId ={
-    'en': 'set Package ID [StickerPackageId] Sticker ID [STICKERId]',
-    'zh-tw': '設定表情主題[StickerPackageId]表情代號[STICKERId] ',
+export const Sendsticker ={
+    'en': 'set Send Package image[STICKER]',
+    'zh-tw': '設定的送出表情圖[STICKER]',
 };
 export const chat_id ={
     'en': 'Chat ID: [ID] ',

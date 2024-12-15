@@ -16,6 +16,8 @@ const ml5 = require('ml5');
 //const jqueryMin = require("./jquery.min.js");
 //require('babel-polyfill');
 //參考文件https://blog.sean.taipei/2016/10/telegram-bot
+
+
 let the_locale = null;
 
 class Scratch3TelegramBot {
@@ -27,7 +29,7 @@ class Scratch3TelegramBot {
             message:'',
             imageFile:'',
             chat_id : '',
-            stickerPackageId : ''
+            stickerPackage : ''
         };
         this.exec = 'https://script.google.com/macros/s/AKfycbyPMsaLgEEcia39_vcK1AmSGfpAi2YViAUcZFMbmKdYJ5niqDVui9Rgb4241Zdwca5d/exec';
     }
@@ -93,24 +95,27 @@ class Scratch3TelegramBot {
                         }
                     },
                 },
-                /*                
+                                
                 {
-                    opcode: 'sendstickerId',
+                    opcode: 'sendsticker',
                     blockType: BlockType.COMMAND,
-                    text: msg.SendstickerId[the_locale],
+                    text: msg.Sendsticker[the_locale],
                     arguments: {
-                        STICKERId: {
+                        STICKER: {
                             type: ArgumentType.NUMBER,
-                            defaultValue: 1,
+                            defaultValue: '😀',
+                            menu: 'sticker_list'
                         },
-                        StickerPackageId:{
-                            type: ArgumentType.NUMBER,
-                            defaultValue: 1,
-                        }
                     },
-                },*/
+                },
                 
             ],
+            menus: {
+                sticker_list: {
+                    acceptReporters: true,
+                    items: ['😀', '😕','😁', '😅', '🤣', '😍', '🤫', '🤔', '🤥','😪','😵‍💫','🥳','😭','💓','💔','👋','👌','💩']
+                },
+            }    
 
         };
     }
@@ -143,7 +148,7 @@ class Scratch3TelegramBot {
                     },
                     body: JSON.stringify({
                         chat_id: this.payload.chat_id,
-                        text: this.payload.message
+                        text: this.payload.sticker+this.payload.message
                     })
                 }
             );
@@ -158,6 +163,7 @@ class Scratch3TelegramBot {
 
             // 成功發送後再清空
             this.payload.message = '';
+            this.payload.sticker = '';
             this.payload.imageFile = '';
             
         } catch (error) {
@@ -201,9 +207,9 @@ class Scratch3TelegramBot {
         }
     }
 
-    async sendstickerId(args){
-        this.payload.stickerID = args.STICKERId;
-        this.payload.stickerPackageId = args.StickerPackageId;
+    sendsticker(args){
+        
+        this.payload.sticker = this.payload.sticker+args.STICKER;        
     } 
     // end of block handlers
 
