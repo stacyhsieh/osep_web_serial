@@ -29,7 +29,7 @@ class Scratch3TelegramBot {
             message:'',
             imageFile:'',
             chat_id : '',
-            stickerPackage : ''
+            sticker : ''
         };
         this.exec = 'https://script.google.com/macros/s/AKfycbyPMsaLgEEcia39_vcK1AmSGfpAi2YViAUcZFMbmKdYJ5niqDVui9Rgb4241Zdwca5d/exec';
     }
