@@ -44,6 +44,7 @@ const builtinExtensions = {
     mqtt: () => require('../extensions/scratch3_mqtt'),
     linenotify: () => require('../extensions/scratch3_linenotify'),
     telegrambot: () => require('../extensions/scratch3_telegrambot'),
+    pushnotifyapi: () => require('../extensions/scratch3_pushnotifyapi'),
     ml2scratch: () => require('../extensions/scratch3_ml2scratch'),
     posenet2scratch: () => require('../extensions/scratch3_posenet2scratch'),
     tm2scratch: () => require('../extensions/scratch3_tm2scratch'), 

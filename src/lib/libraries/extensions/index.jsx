@@ -101,6 +101,9 @@ import linenotifyInsetIconURL from "./linenotify/linenotify_small.svg";
 import telegrambotImage from "./telegrambot/telegrambot.svg";
 import telegrambotInsetIconURL from "./telegrambot/telegrambot_small.svg";
 
+import pushnotifyapiImage from "./pushnotifyapi/pushnotifyapi.svg";
+import pushnotifyapiInsetIconURL from "./pushnotifyapi/pushnotifyapi_small.png";
+
 import ml2scratchIconURL from "./ml2scratch/ml2scratch.png";
 import ml2scratchInsetIconURL from "./ml2scratch/ml2scratch-small.png";
 
@@ -729,6 +732,25 @@ const extensions = [
         defaultMessage="Use Line Notify to send messages."
         description="Use Line Notify to send messages."
         id="gui.extension.telegrambot.description"
+      />
+    ),
+    featured: true,
+    disabled: false,
+    internetConnectionRequired: true,
+    bluetoothRequired: false,
+    //helpLink: ''
+  },
+  {
+    name: "Push Notify API",
+    extensionId: "pushnotifyapi",
+    collaborator: "estea chen",
+    iconURL: pushnotifyapiImage,
+    insetIconURL: pushnotifyapiInsetIconURL,
+    description: (
+      <FormattedMessage
+        defaultMessage="Use Push Notify API app to send messages."
+        description="Use Push Notify API app to send messages."
+        id="gui.extension.pushnotifyapi.description"
       />
     ),
     featured: true,

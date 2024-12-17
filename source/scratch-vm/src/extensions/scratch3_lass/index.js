@@ -178,17 +178,17 @@ class gasoLASS {
                         locationName: {
                             type: ArgumentType.STRING,
                             menu: 'locationName',
-                            defaultValue: 5
+                            defaultValue: msg.taipeiCity[theLocale]
                         },
                         forecastTime: {
                             type: ArgumentType.NUMBER,
                             menu: 'forecastTime',
-                            defaultValue: 0
+                            defaultValue: '12'
                         },
                         weatherAttrs: {
                             type: ArgumentType.STRING,
                             menu: 'weatherAttrs',
-                            defaultValue: 0
+                            defaultValue: msg.Wx[theLocale]
                         }
                     },
                     text: msg.getWeatherData[theLocale]
@@ -216,47 +216,37 @@ class gasoLASS {
                 locationName: {
                     acceptReporters: true,
                     items: [
-                        { text: msg.taipeiCity[theLocale], value: 5 },
-                        { text: msg.newTaipeiCity[theLocale], value: 1 },
-                        { text: msg.taoyuanCity[theLocale], value: 13 },
-                        { text: msg.taichungCity[theLocale], value: 11 },
-                        { text: msg.tainanCity[theLocale], value: 6 },
-                        { text: msg.kaohsiungCity[theLocale], value: 15 },
-                        { text: msg.keelungCity[theLocale], value: 18 },
-                        { text: msg.hsinchuCounty[theLocale], value: 3 },
-                        { text: msg.hsinchuCity[theLocale], value: 4 },
-                        { text: msg.miaoliCounty[theLocale], value: 8 },
-                        { text: msg.changhuaCounty[theLocale], value: 20 },
-                        { text: msg.nantouCounty[theLocale], value: 14 },
-                        { text: msg.yunlinCounty[theLocale], value: 9 },
-                        { text: msg.chiayiCounty[theLocale], value: 0 },
-                        { text: msg.chiayiCity[theLocale], value: 2 },
-                        { text: msg.pingtungCounty[theLocale], value: 17 },
-                        { text: msg.yilanCounty[theLocale], value: 7 },
-                        { text: msg.hualienCounty[theLocale], value: 10 },
-                        { text: msg.taitungCounty[theLocale], value: 12 },
-                        { text: msg.penghuCounty[theLocale], value: 19 },
-                        { text: msg.kinmenCounty[theLocale], value: 16 },
-                        { text: msg.lienchiangCounty[theLocale], value: 21 },
+                        msg.taipeiCity[theLocale],
+                        msg.newTaipeiCity[theLocale],
+                        msg.taoyuanCity[theLocale],
+                        msg.taichungCity[theLocale],
+                        msg.tainanCity[theLocale],
+                        msg.kaohsiungCity[theLocale],
+                        msg.keelungCity[theLocale],
+                        msg.hsinchuCounty[theLocale],
+                        msg.hsinchuCity[theLocale],
+                        msg.miaoliCounty[theLocale],
+                        msg.changhuaCounty[theLocale],
+                        msg.nantouCounty[theLocale],
+                        msg.yunlinCounty[theLocale],
+                        msg.chiayiCounty[theLocale],
+                        msg.chiayiCity[theLocale],
+                        msg.pingtungCounty[theLocale],
+                        msg.yilanCounty[theLocale],
+                        msg.hualienCounty[theLocale],
+                        msg.taitungCounty[theLocale],
+                        msg.penghuCounty[theLocale],
+                        msg.kinmenCounty[theLocale],
+                        msg.lienchiangCounty[theLocale],
                     ]
                 },
                 forecastTime: {
                     acceptReporters: true,
-                    items: [
-                        { text: '12', value: 0 },
-                        { text: '24', value: 1 },
-                        { text: '36', value: 2 },
-                    ]
+                    items: ['12', '24', '36']
                 },
                 weatherAttrs: {
                     acceptReporters: true,
-                    items: [
-                        { text: msg.Wx[theLocale], value: 0 },
-                        { text: msg.MaxT[theLocale], value: 4 },
-                        { text: msg.MinT[theLocale], value: 2 },
-                        { text: msg.CI[theLocale], value: 3 },
-                        { text: msg.PoP[theLocale], value: 1 }
-                    ]
+                    items: [msg.Wx[theLocale], msg.MaxT[theLocale], msg.MinT[theLocale], msg.CI[theLocale], msg.PoP[theLocale]]
                 },
             }
         };
@@ -387,6 +377,51 @@ class gasoLASS {
         var locationName = args.locationName;
         var forecastTime = args.forecastTime;
         var weatherAttrs = args.weatherAttrs;
+
+        var locationMap = {
+            [msg.taipeiCity[theLocale]]: 5,
+            [msg.newTaipeiCity[theLocale]]: 1,
+            [msg.taoyuanCity[theLocale]]: 13,
+            [msg.taichungCity[theLocale]]: 11,
+            [msg.tainanCity[theLocale]]: 6,
+            [msg.kaohsiungCity[theLocale]]: 15,
+            [msg.keelungCity[theLocale]]: 18,
+            [msg.hsinchuCounty[theLocale]]: 3,
+            [msg.hsinchuCity[theLocale]]: 4,
+            [msg.miaoliCounty[theLocale]]: 8,
+            [msg.changhuaCounty[theLocale]]: 20,
+            [msg.nantouCounty[theLocale]]: 14,
+            [msg.yunlinCounty[theLocale]]: 9,
+            [msg.chiayiCounty[theLocale]]: 0,
+            [msg.chiayiCity[theLocale]]: 2,
+            [msg.pingtungCounty[theLocale]]: 17,
+            [msg.yilanCounty[theLocale]]: 7,
+            [msg.hualienCounty[theLocale]]: 10,
+            [msg.taitungCounty[theLocale]]: 12,
+            [msg.penghuCounty[theLocale]]: 19,
+            [msg.kinmenCounty[theLocale]]: 16,
+            [msg.lienchiangCounty[theLocale]]: 21
+        };
+
+        locationName = locationMap[locationName];
+
+        var forecastTimeMap = {
+            '12': 0,
+            '24': 1,
+            '36': 2,
+        };
+
+        forecastTime = forecastTimeMap[forecastTime];
+
+        var weatherAttrsMap = {
+            [msg.Wx[theLocale]]: 0,
+            [msg.MaxT[theLocale]]: 4,
+            [msg.MinT[theLocale]]: 2,
+            [msg.CI[theLocale]]: 3,
+            [msg.PoP[theLocale]]: 1
+        };
+
+        weatherAttrs = weatherAttrsMap[weatherAttrs];
 
         var jsonData = JSON.stringify(this.weatherData);
         var parseData = JSON.parse(jsonData);

@@ -94,8 +94,8 @@ class dataProcessing {
                     arguments: {
                         before: {
                             type: ArgumentType.STRING,
-                            menu: 'selectYear',
-                            defaultValue: '1'
+                            menu: 'selectCarrySystem',
+                            defaultValue: msg.Binary[theLocale]
                         },
                         data: {
                             type: ArgumentType.STRING,
@@ -103,8 +103,8 @@ class dataProcessing {
                         },
                         after: {
                             type: ArgumentType.STRING,
-                            menu: 'selectYear',
-                            defaultValue: '3'
+                            menu: 'selectCarrySystem',
+                            defaultValue: msg.Decimal[theLocale]
                         },
                     },
                     text: msg.conversion[theLocale]
@@ -279,26 +279,9 @@ class dataProcessing {
                 },
             ],
             menus: {
-                selectYear: {
+                selectCarrySystem: {
                     acceptReporters: true,
-                    items: [
-                        {
-                            text: msg.Binary[theLocale],
-                            value: '1'
-                        },
-                        {
-                            text: msg.Octal[theLocale],
-                            value: '2'
-                        },
-                        {
-                            text: msg.Decimal[theLocale],
-                            value: '3'
-                        },
-                        {
-                            text: msg.Hexadecimal[theLocale],
-                            value: '4'
-                        },
-                    ]
+                    items: [msg.Binary[theLocale], msg.Octal[theLocale], msg.Decimal[theLocale], msg.Hexadecimal[theLocale]]
                 },
             }
         };
@@ -310,6 +293,16 @@ class dataProcessing {
         var data = args.data;
         var convertToDecimal;
         var convertToOtherBases;
+
+        var conversionMap = {
+            [msg.Binary[theLocale]]: '1',
+            [msg.Octal[theLocale]]: '2',
+            [msg.Decimal[theLocale]]: '3',
+            [msg.Hexadecimal[theLocale]]: '4'
+        };
+
+        beforeConversion = conversionMap[beforeConversion];
+        afterConversion = conversionMap[afterConversion];
 
         switch (beforeConversion) {
             case "1": convertToDecimal = parseInt(data, 2); break;
