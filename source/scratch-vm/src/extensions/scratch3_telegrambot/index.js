@@ -29,7 +29,6 @@ class Scratch3TelegramBot {
             message:'',
             imageFile:'',
             chat_id : '',
-            sticker : ''
         };
         this.exec = 'https://script.google.com/macros/s/AKfycbyPMsaLgEEcia39_vcK1AmSGfpAi2YViAUcZFMbmKdYJ5niqDVui9Rgb4241Zdwca5d/exec';
     }
@@ -48,6 +47,17 @@ class Scratch3TelegramBot {
                     opcode: 'checkOut',
                     blockType: BlockType.COMMAND,
                     text: msg.checkOut[the_locale],
+                },
+                {
+                    opcode: 'checkchatid',
+                    blockType: BlockType.COMMAND,
+                    text: msg.checkchatid[the_locale],
+                    arguments: {
+                        TOKEN: {
+                            type: ArgumentType.STRING,
+                            defaultValue: ' ',
+                        }
+                    },
                 },
                 {
                     opcode: 'gettoken',
@@ -85,28 +95,38 @@ class Scratch3TelegramBot {
                     },
                 },
                 {
-                    opcode: 'sendmessage',
-                    blockType: BlockType.COMMAND,
-                    text: msg.SendMessage[the_locale],
-                    arguments: {
-                        MESSAGE: {
-                            type: ArgumentType.STRING,
-                            defaultValue: ' ',
-                        }
-                    },
-                },
-                                
-                {
                     opcode: 'sendsticker',
                     blockType: BlockType.COMMAND,
                     text: msg.Sendsticker[the_locale],
                     arguments: {
                         STICKER: {
-                            type: ArgumentType.NUMBER,
+                            type: ArgumentType.STRING,
                             defaultValue: '😀',
                             menu: 'sticker_list'
                         },
                     },
+                },
+                {
+                    opcode: 'setsendtext',
+                    blockType: BlockType.COMMAND,
+                    text: msg.setsendtext[the_locale],
+                    arguments: {
+                        TEXT: {
+                            type: ArgumentType.STRING,
+                            defaultValue: ' ',                            
+                        },
+                    },
+                },
+                {
+                    opcode: 'sendmessage',
+                    blockType: BlockType.COMMAND,
+                    text: msg.SendMessage[the_locale],
+                    /*arguments: {
+                        MESSAGE: {
+                            type: ArgumentType.STRING,
+                            defaultValue: ' ',
+                        }
+                    },*/
                 },
                 
             ],
@@ -125,6 +145,11 @@ class Scratch3TelegramBot {
         window.open('https://unicode.org/emoji/charts/full-emoji-list.html');
     }
 
+    checkchatid(args){
+        apikey=args.TOKEN;
+        window.open('https://api.telegram.org/bot'+apikey+'/getUpdates');
+    }
+
     get_chat_id(args){
         this.payload.chat_id=args.ID;
     }
@@ -134,9 +159,14 @@ class Scratch3TelegramBot {
         console.log(this.payload.token);
     }
 
+    setsendtext (args) {
+        this.payload.message = this.payload.message+args.TEXT;
+        console.log('message=',this.payload.message);
+    }
+
     async sendmessage(args){
         try {
-            this.payload.message = args.MESSAGE;
+            //this.payload.message = args.MESSAGE;
             console.log('Sending message:', this.payload);
             
             const response = await fetch(
@@ -148,7 +178,7 @@ class Scratch3TelegramBot {
                     },
                     body: JSON.stringify({
                         chat_id: this.payload.chat_id,
-                        text: this.payload.sticker+this.payload.message
+                        text: this.payload.message
                     })
                 }
             );
@@ -208,8 +238,7 @@ class Scratch3TelegramBot {
     }
 
     sendsticker(args){
-        
-        this.payload.sticker = this.payload.sticker+args.STICKER;        
+        this.payload.message = this.payload.message+args.STICKER;
     } 
     // end of block handlers
 
