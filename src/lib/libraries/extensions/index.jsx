@@ -131,6 +131,9 @@ import openaiInsetIconURL from "./openai/openai-small.svg";
 import geminiImage from "./gemini/gemini.png";
 import geminiInsetIconURL from "./gemini/gemini-small.svg";
 
+/*import deepseekImage from "./deepseek/deepseek.svg";
+import deepseekInsetIconURL from "./deepseek/deepseek-small.svg";*/
+
 import facemesh2scratchIconURL from "./facemesh2scratch/facemesh2scratch.png";
 import facemesh2scratchInsetIconURL from "./facemesh2scratch/facemesh2scratch-small.png";
 import handpose2scratchIconURL from "./handpose2scratch/handpose2scratch.png";
@@ -140,6 +143,13 @@ import davinciImage from "./davinci/davinci.png";
 import davinciInsetIconURL from "./davinci/davinci-small.png";
 import llmstudioImage from "./llmstudio/llmstudio.svg";
 import llmstudioInsetIconURL from "./llmstudio/llmstudio-small.png";
+
+import ic2scratchImage from "./ic2scratch/ic2scratch.png";
+import ic2scratchInsetIconURL from "./ic2scratch/ic2scratch-small.png";
+
+import textSentimentImage from "./textSentiment/textSentiment.png";
+import textSentimentInsetIconURL from "./textSentiment/textSentiment-small.png";
+
 
 const version = "v2-0.2.4";
 
@@ -1140,6 +1150,27 @@ const extensions = [
     useAutoScan: false,
     helpLink: "https://www.gemini.com/",
   },
+  /*{
+    name: "deepseek",
+    extensionId: "deepseek",
+    collaborator: "estea chen",
+    iconURL: deepseekImage,
+    insetIconURL: deepseekInsetIconURL,
+    description: (
+      <FormattedMessage
+        defaultMessage="Use deepseek’s models to process natural language and generate images."
+        description="Use deepseek’s models to process natural language and generate images."
+        id="gui.extension.deepseek.description"
+      />
+    ),
+    featured: true,
+    disabled: false,
+    // bluetoothRequired: false,
+    internetConnectionRequired: true,
+    // launchPeripheralConnectionFlow: false,
+    useAutoScan: false,
+    //helpLink: "https://www.deepseek.com/",
+  },*/
   {
     name: "webserialmicro:bit",
     extensionId: "webserialmicrobit",
@@ -1224,6 +1255,50 @@ const extensions = [
     useAutoScan: false,
     helpLink: "https://lmstudio.ai/",
     },
+    {
+    name: "ic2scratch",
+    extensionId: "ic2scratch",
+    collaborator: "champierre",
+    iconURL: ic2scratchImage,
+    insetIconURL: ic2scratchInsetIconURL,
+    description: (
+      <FormattedMessage
+        defaultMessage='Image Classifier Blocks.'
+        description='Image Classifier Blocks.'
+        id='gui.extension.ic2scratch.description'
+      />
+    ),
+    featured: true,
+    disabled: false,
+    internetConnectionRequired: true,
+    bluetoothRequired: false,
+    helpLink: 'https://github.com/champierre/ic2scratch'
+  },
+  {
+    name: (
+      <FormattedMessage
+        defaultMessage="Text Sentiment"
+        description="Text Sentiment extension"
+        id="gui.extension.textSentiment.title"
+      />
+    ),
+    extensionId: "textSentiment",
+    collaborator: "TYiC",
+    iconURL: textSentimentImage,
+    insetIconURL: textSentimentInsetIconURL,
+    description: (
+      <FormattedMessage
+        defaultMessage="Text Sentiment."
+        description="Text Sentiment."
+        id="gui.extension.textSentiment.description"
+      />
+    ),
+    featured: true,
+    disabled: false,
+    internetConnectionRequired: true,
+    useAutoScan: false,
+    helpLink: "https://github.com/estea8968/scratch3-internet",
+  },
 ];
 export { extensions };
 export default extensions;
