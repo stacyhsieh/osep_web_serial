@@ -131,8 +131,8 @@ import openaiInsetIconURL from "./openai/openai-small.svg";
 import geminiImage from "./gemini/gemini.png";
 import geminiInsetIconURL from "./gemini/gemini-small.svg";
 
-/*import deepseekImage from "./deepseek/deepseek.svg";
-import deepseekInsetIconURL from "./deepseek/deepseek-small.svg";*/
+/*import ollamaImage from "./ollama/ollama.svg";
+import ollamaInsetIconURL from "./ollama/ollama-small.svg";*/
 
 import facemesh2scratchIconURL from "./facemesh2scratch/facemesh2scratch.png";
 import facemesh2scratchInsetIconURL from "./facemesh2scratch/facemesh2scratch-small.png";
@@ -150,6 +150,8 @@ import ic2scratchInsetIconURL from "./ic2scratch/ic2scratch-small.png";
 import textSentimentImage from "./textSentiment/textSentiment.png";
 import textSentimentInsetIconURL from "./textSentiment/textSentiment-small.png";
 
+import faceExpressionRecogintionImage from "./faceExpressionRecogintion/faceExpressionRecogintion.png";
+import faceExpressionRecogintionIconURL from "./faceExpressionRecogintion/faceExpressionRecogintion-small.png";
 
 const version = "v2-0.2.4";
 
@@ -1151,16 +1153,16 @@ const extensions = [
     helpLink: "https://www.gemini.com/",
   },
   /*{
-    name: "deepseek",
-    extensionId: "deepseek",
+    name: "ollama",
+    extensionId: "ollama",
     collaborator: "estea chen",
-    iconURL: deepseekImage,
-    insetIconURL: deepseekInsetIconURL,
+    iconURL: ollamaImage,
+    insetIconURL: ollamaInsetIconURL,
     description: (
       <FormattedMessage
-        defaultMessage="Use deepseek’s models to process natural language and generate images."
-        description="Use deepseek’s models to process natural language and generate images."
-        id="gui.extension.deepseek.description"
+        defaultMessage="Use ollama’s models to process natural language and generate images."
+        description="Use ollama’s models to process natural language and generate images."
+        id="gui.extension.ollama.description"
       />
     ),
     featured: true,
@@ -1299,6 +1301,32 @@ const extensions = [
     useAutoScan: false,
     helpLink: "https://github.com/estea8968/scratch3-internet",
   },
+  {
+    name: (
+      <FormattedMessage
+        defaultMessage="Face Expression Recogintion"
+        description="Face Expression Recogintion extension"
+        id="gui.extension.faceExpressionRecogintion.title"
+      />
+    ),
+    extensionId: "faceExpressionRecogintion",
+    collaborator: "TYiC",
+    iconURL: faceExpressionRecogintionImage,
+    insetIconURL: faceExpressionRecogintionIconURL,
+    description: (
+      <FormattedMessage
+        defaultMessage="Face Expression Recogintion"
+        description="Face Expression Recogintion."
+        id="gui.extension.faceExpressionRecogintion.description"
+      />
+    ),
+    featured: true,
+    disabled: false,
+    // bluetoothRequired: false,
+    internetConnectionRequired: true,
+    // launchPeripheralConnectionFlow: false,
+    useAutoScan: false,
+  },  
 ];
 export { extensions };
 export default extensions;

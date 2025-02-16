@@ -50,8 +50,7 @@ const builtinExtensions = {
     tm2scratch: () => require('../extensions/scratch3_tm2scratch'), 
     microbitMore:() => require('../extensions/scratch3_microbitMore'),
     openai: () => require('../extensions/scratch3_openai'),
-    gemini: () => require('../extensions/scratch3_gemini'),
-    //deepseek: () => require('../extensions/scratch3_deepseek'),    
+    gemini: () => require('../extensions/scratch3_gemini'),  
     facemesh2scratch:() => require('../extensions/scratch3_facemesh2scratch'),
     handpose2scratch:() => require('../extensions/scratch3_handpose2scratch'), 
     dataMining:() => require('../extensions/scratch3_dataMining'), 
@@ -59,6 +58,7 @@ const builtinExtensions = {
     llmstudio:() => require('../extensions/scratch3_llmstudio'),
     ic2scratch: () => require('../extensions/scratch3_ic2scratch'),
     textSentiment: () => require('../extensions/scratch3_textSentiment'),
+    faceExpressionRecogintion: () => require('../extensions/scratch3_faceExpressionRecogintion'),
     //tmpose2scratch: () => require('../extensions/scratch3_tmpose2scratch'),
     //qrcode: () => require('../extensions/scratch3_qrcode'),
 };

@@ -60563,8 +60563,6 @@ export default {
     
     "gui.extension.qrcodeblocks.name":"QR Code",
     "gui.extension.tmpose2scratchblocks.description":"辨識自己的姿勢",
-    "gui.extension.openai.description":"使用 OpenAI 公司的人工智慧模型進行自然語言與影像處理任務",
-    "gui.extension.deepseek.description":"使用 deepseek 公司的人工智慧模型進行自然語言與影像處理任務",    
     "videoSensing.changeUsbWebcam":"切換鏡頭",
     "videoSensing.ue_cam":"使用[WEBCAM]鏡頭",
     "videoSensing.u_or_e":"後,前",
@@ -60589,5 +60587,7 @@ export default {
     "gui.extension.ic2scratch.description": "影像分類器",
     "gui.extension.textSentiment.title":"文本情緒辨識",
     "gui.extension.textSentiment.description": "使用文本情緒模型，辨識文本是否為正面或負面情緒",
+    "gui.extension.faceExpressionRecogintion.description":"使用攝影機捕捉臉部表情，辨識情緒如開心、平靜、生氣等",
+    "gui.extension.faceExpressionRecogintion.title":"臉部表情辨識",    
   }
 };
